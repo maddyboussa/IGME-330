@@ -2,110 +2,161 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+
+
     <title>Greeter</title>
     <style>
       *{font-size:1.5em;}
-    </style>
 
-  <script>
+      /* adding our own css !*/
+      /* this "declaratively" changes the style (we tell it in css) */
+      /* can also "imparatively change style through javascript */
 
-  "use strict"; // important !!
+      #btn-hello{
+        height: 50px;
+        width: 150px;
+        font-size: 14pt;
+      }
 
-  window.onload = init; // add init function to window.onload event
-  // this will call the script when the window loads
+      body{
+        font-family: 'Dancing Script', cursive;
+      }
 
-  // notes
-
-  // create an init function to run when window is loaded
-  function init(){
-    
-    function addThem(num1, num2){
-      return num1 + num2;
-    }
-
-    const sum = addThem(5 + 5);
-
-    const alias = addThem;
-    console.log(alias(5, 5));
-
-    // declare an object literal
-    let a = {
-      name: "Maddy"
-    };
-
-    console.log(a.name);
-
-    // var is bad
-    var b = "bob";
-
-    // var gives you function scoping, means variables can be seen out of scope
-    // DONT use var, use let or const
-
-    // in "sloppy mode", if you forget to declare a variable, it gets declared for you in global scope
-    // duplicate parameter names are allowed in functions - bad
-    // therefore, type "use strcit" at the top of script
-
-    console.log(i, c); // console returns undefined for this variable, even though it has yet to be defined
-    if (true)
-    {
-      if (true)
+      /* MEDIA QUERY*/
+      @media only screen and (min-width: 1024px)
       {
-        if (true)
-        {
-          for (var i = 0; i < 5; i++)   // if we change it to be let i, this will then throw an error
-          {
-            var c = true;
-          }
+        body{
+          background-color: red;
+          padding: 100px;
         }
       }
-    }
 
-    // exercise
+    </style>
 
-    // 1 - get a reference to the button
-    let buttonRef = document.querySelector("#btn-hello"); // selecting based on id due to #
-    console.log(buttonRef); // returns null, because it is trying to look for it before the DOM gets to load
-    // this can be fixed by placing the script tag to the bottom of the html
+    <script>
 
-    // 2 - add a click event to button that calls a `sayHello` function
-    buttonRef.addEventListener("click", sayHello);
+      "use strict"; // important !!
 
-    // also can do 
-    //buttonRef.onClick = sayHello;
+      window.onload = init; // add init function to window.onload event
+      // this will call the script when the window loads
 
-    //buttonRef.onClick = sayHello(); --> THIS WILL ERROR, don't do () because it's trying to add the return value of the function to the event,
-    // not the function itself
+      // notes
 
-    // 3 - create a `sayHello()` function
-    function sayHello()
-    {
-      // 3A - get name of person from the <input>
+      // create an init function to run when window is loaded
+      function init(){
+        
+        function addThem(num1, num2){
+          return num1 + num2;
+        }
 
-      // grabs the value of the input html and stores it in a variable
-      const name = document.querySelector("#input-firstname").value;
-      console.log(name);
+        const sum = addThem(5 + 5);
 
-      // 3B - get a reference to the #output <p>
-      const output = document.querySelector("#output");
+        const alias = addThem;
+        console.log(alias(5, 5));
 
-      // 3C - update HTML of #output <p>
-      output.innerHTML = name;
-    }
-  }
+        // declare an object literal
+        let a = {
+          name: "Maddy"
+        };
+
+        console.log(a.name);
+
+        // var is bad
+        var b = "bob";
+
+        // var gives you function scoping, means variables can be seen out of scope
+        // DONT use var, use let or const
+
+        // in "sloppy mode", if you forget to declare a variable, it gets declared for you in global scope
+        // duplicate parameter names are allowed in functions - bad
+        // therefore, type "use strcit" at the top of script
+
+        console.log(i, c); // console returns undefined for this variable, even though it has yet to be defined
+        if (true)
+        {
+          if (true)
+          {
+            if (true)
+            {
+              for (var i = 0; i < 5; i++)   // if we change it to be let i, this will then throw an error
+              {
+                var c = true;
+              }
+            }
+          }
+        }
+
+        // Greeter exercise
+
+        // styling using javascript
+
+        const p = document.querySelector("#output");
+        p.style.color = "red";
+        p.style.backgroundColor = "yellow";
+
+
+        // 1 - get a reference to the button
+        let buttonHello = document.querySelector("#btn-hello"); // selecting based on id due to #
+        console.log(buttonHello); // returns null, because it is trying to look for it before the DOM gets to load
+        // this can be fixed by placing the script tag to the bottom of the html
+
+        let buttonGoobye = document.querySelector("#btn-goodbye");
+
+        // 2 - add a click event to button that calls a `sayHello` function
+        buttonHello.addEventListener("click", sayHello);
+
+        // also can do 
+        //buttonRef.onClick = sayHello;
+
+        //buttonRef.onClick = sayHello(); --> THIS WILL ERROR, don't do () because it's trying to add the return value of the function to the event,
+        // not the function itself
+
+        // 3 - create a `sayHello()` function
+        function sayHello()
+        {
+          // 3A - get name of person from the <input>
+
+          // grabs the value of the input html and stores it in a variable
+          let name = document.querySelector("#input-firstname").value.trim() || "Parker";  // by using .trim(), removes spaces from input, catches if ppl just imput a space
+          // by using logical or ||, if the first statement is false (string is empty, etc.), itll return the second portion which is "Parker"
+
+          console.log(name);
+
+          // if there is no name in the input, return default
+          if (!name)
+          {
+            name = "Parker";
+          }
+
+          // could also do: if (name.length == 0)
+          // could also use logical or
+
+          // 3B - get a reference to the #output <p>
+          const output = document.querySelector("#output");
+
+          // 3C - update HTML of #output <p>
+          output.innerHTML = name;
+        }
 
 
 
-  </script>
+      }
+
+    </script>
     
   </head>
 <body>
-  <button id="btn-hello">Click Me!</button>
-  <input id="input-firstname" placeholder="Type in your name">
+  <button id="btn-hello">Say Hello!</button>
+  <button id="btn-goodbye">Say Goodbye!</button>
+
+  <hr>
+
+  <input id="input-firstname" placeholder="Type in your first name">
+  <input id="input-lasname" placeholder="Type in your last name">
   <p id="output">???</p>
-
-
-
-
-
 </body>
 </html>
