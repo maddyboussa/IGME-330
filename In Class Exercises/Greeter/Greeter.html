@@ -16,7 +16,7 @@
       /* this "declaratively" changes the style (we tell it in css) */
       /* can also "imparatively change style through javascript */
 
-      #btn-hello{
+      #btn-hello, #btn-goodbye{
         height: 50px;
         width: 150px;
         font-size: 14pt;
@@ -104,10 +104,11 @@
         console.log(buttonHello); // returns null, because it is trying to look for it before the DOM gets to load
         // this can be fixed by placing the script tag to the bottom of the html
 
-        let buttonGoobye = document.querySelector("#btn-goodbye");
+        let buttonGoodbye = document.querySelector("#btn-goodbye");
 
         // 2 - add a click event to button that calls a `sayHello` function
         buttonHello.addEventListener("click", sayHello);
+        buttonGoodbye.addEventListener("click", sayGoodbye);
 
         // also can do 
         //buttonRef.onClick = sayHello;
@@ -115,22 +116,27 @@
         //buttonRef.onClick = sayHello(); --> THIS WILL ERROR, don't do () because it's trying to add the return value of the function to the event,
         // not the function itself
 
+        // store name variables
+        let firstName = "";
+        let lastName = "";
+
         // 3 - create a `sayHello()` function
         function sayHello()
         {
           // 3A - get name of person from the <input>
 
           // grabs the value of the input html and stores it in a variable
-          let name = document.querySelector("#input-firstname").value.trim() || "Parker";  // by using .trim(), removes spaces from input, catches if ppl just imput a space
+          firstName = document.querySelector("#input-firstname").value.trim() || "Peter";  // by using .trim(), removes spaces from input, catches if ppl just imput a space
           // by using logical or ||, if the first statement is false (string is empty, etc.), itll return the second portion which is "Parker"
+          lastName = document.querySelector("#input-lastname").value.trim() || "Parker";
 
-          console.log(name);
+          console.log(firstName);
 
           // if there is no name in the input, return default
-          if (!name)
-          {
-            name = "Parker";
-          }
+          // if (!firstName)
+          // {
+          //   firstName = "Peter";
+          // }
 
           // could also do: if (name.length == 0)
           // could also use logical or
@@ -139,7 +145,19 @@
           const output = document.querySelector("#output");
 
           // 3C - update HTML of #output <p>
-          output.innerHTML = name;
+          output.innerHTML = `Hello ${firstName} ${lastName}`;
+        }
+
+        function sayGoodbye()
+        {
+          firstName = document.querySelector("#input-firstname").value.trim() || "Peter";
+          lastName = document.querySelector("#input-lastname").value.trim() || "Parker";
+
+          console.log(lastName);
+
+          const output = document.querySelector("#output");
+
+          output.innerHTML = `Goodbye ${firstName} ${lastName}`;
         }
 
 
@@ -156,7 +174,7 @@
   <hr>
 
   <input id="input-firstname" placeholder="Type in your first name">
-  <input id="input-lasname" placeholder="Type in your last name">
+  <input id="input-lastname" placeholder="Type in your last name">
   <p id="output">???</p>
 </body>
 </html>
