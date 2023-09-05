@@ -47,26 +47,26 @@
       // notes
 
       // create an init function to run when window is loaded
-      function init(){
+    function init(){
         
-        function addThem(num1, num2){
-          return num1 + num2;
-        }
+      //   function addThem(num1, num2){
+      //     return num1 + num2;
+      //   }
 
-        const sum = addThem(5 + 5);
+      //   const sum = addThem(5 + 5);
 
-        const alias = addThem;
-        console.log(alias(5, 5));
+      //   const alias = addThem;
+      //   console.log(alias(5, 5));
 
-        // declare an object literal
-        let a = {
-          name: "Maddy"
-        };
+      //   // declare an object literal
+      //   let a = {
+      //     name: "Maddy"
+      //   };
 
-        console.log(a.name);
+      //   console.log(a.name);
 
         // var is bad
-        var b = "bob";
+        //var b = "bob";
 
         // var gives you function scoping, means variables can be seen out of scope
         // DONT use var, use let or const
@@ -75,20 +75,20 @@
         // duplicate parameter names are allowed in functions - bad
         // therefore, type "use strcit" at the top of script
 
-        console.log(i, c); // console returns undefined for this variable, even though it has yet to be defined
-        if (true)
-        {
-          if (true)
-          {
-            if (true)
-            {
-              for (var i = 0; i < 5; i++)   // if we change it to be let i, this will then throw an error
-              {
-                var c = true;
-              }
-            }
-          }
-        }
+        // console.log(i, c); // console returns undefined for this variable, even though it has yet to be defined
+        // if (true)
+        // {
+        //   if (true)
+        //   {
+        //     if (true)
+        //     {
+        //       for (var i = 0; i < 5; i++)   // if we change it to be let i, this will then throw an error
+        //       {
+        //         var c = true;
+        //       }
+        //     }
+        //   }
+        // }
 
         // Greeter exercise
 
@@ -130,6 +130,10 @@
           // by using logical or ||, if the first statement is false (string is empty, etc.), itll return the second portion which is "Parker"
           lastName = document.querySelector("#input-lastname").value.trim() || "Parker";
 
+          // ternary operator - works as a 1 line if statement
+          // boolean check, then ? variable : value to store if false
+          //firstName = firstName.length != 0 ? name : "Peter";
+
           console.log(firstName);
 
           // if there is no name in the input, return default
@@ -159,8 +163,6 @@
 
           output.innerHTML = `Goodbye ${firstName} ${lastName}`;
         }
-
-
 
       }
 

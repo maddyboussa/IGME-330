@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+
+
+    <title>More Greeter</title>
+    <style>
+      *{font-size:1.5em;}
+
+      /* adding our own css !*/
+      /* this "declaratively" changes the style (we tell it in css) */
+      /* can also "imparatively change style through javascript */
+
+      #btn-hello, #btn-goodbye{
+        height: 50px;
+        width: 150px;
+        font-size: 14pt;
+      }
+
+      body{
+        font-family: 'Dancing Script', cursive;
+      }
+
+      /* MEDIA QUERY*/
+      @media only screen and (min-width: 1024px)
+      {
+        body{
+          background-color: red;
+          padding: 100px;
+        }
+      }
+
+    </style>
+
+    <script>
+
+      "use strict"; // important !!
+
+      window.onload = init; // add init function to window.onload event
+      // this will call the script when the window loads
+
+      // create an init function to run when window is loaded
+    function init(){
+
+        // Greeter exercise
+
+        // styling using javascript
+
+        const p = document.querySelector("#output");
+        p.style.color = "red";
+        p.style.backgroundColor = "yellow";
+
+
+        // 1 - get a reference to the button
+        let buttonHello = document.querySelector("#btn-hello"); // selecting based on id due to #
+        console.log(buttonHello); // returns null, because it is trying to look for it before the DOM gets to load
+        // this can be fixed by placing the script tag to the bottom of the html
+
+        let buttonGoodbye = document.querySelector("#btn-goodbye");
+
+        // 2 - add a click event to button that calls a `sayHello` function
+        //buttonHello.addEventListener("click", sayHello);
+        //buttonGoodbye.addEventListener("click", sayGoodbye);
+
+        // need a wrapper function to call greet functions in a single function
+        // this allows us to pass in parameters and the function won't get called until the anonmyous wrapper function is called when user clicks
+        buttonHello.onclick = () => greet("Hello");
+        buttonGoodbye.onclick = () => greet("Goodbye");
+
+        // also can do 
+        //buttonRef.onClick = sayHello;
+
+        //buttonRef.onClick = sayHello(); --> THIS WILL ERROR, don't do () because it's trying to add the return value of the function to the event,
+        // not the function itself
+
+        // store name variables
+        let firstName = "";
+        let lastName = "";
+
+        // 3 - create a `sayHello()` function
+        // function sayHello()
+        // {
+        //   // 3A - get name of person from the <input>
+
+        //   // grabs the value of the input html and stores it in a variable
+        //   firstName = document.querySelector("#input-firstname").value.trim() || "Peter";  // by using .trim(), removes spaces from input, catches if ppl just imput a space
+        //   // by using logical or ||, if the first statement is false (string is empty, etc.), itll return the second portion which is "Parker"
+        //   lastName = document.querySelector("#input-lastname").value.trim() || "Parker";
+
+        //   // ternary operator - works as a 1 line if statement
+        //   // boolean check, then ? variable : value to store if false
+        //   //firstName = firstName.length != 0 ? name : "Peter";
+
+        //   console.log(firstName);
+
+        //   // if there is no name in the input, return default
+        //   // if (!firstName)
+        //   // {
+        //   //   firstName = "Peter";
+        //   // }
+
+        //   // could also do: if (name.length == 0)
+        //   // could also use logical or
+
+        //   // 3B - get a reference to the #output <p>
+        //   const output = document.querySelector("#output");
+
+        //   // 3C - update HTML of #output <p>
+        //   output.innerHTML = `Hello ${firstName} ${lastName}`;
+        // }
+
+        // function sayGoodbye()
+        // {
+        //   firstName = document.querySelector("#input-firstname").value.trim() || "Peter";
+        //   lastName = document.querySelector("#input-lastname").value.trim() || "Parker";
+
+        //   console.log(lastName);
+
+        //   const output = document.querySelector("#output");
+
+        //   output.innerHTML = `Goodbye ${firstName} ${lastName}`;
+        // }
+
+        // combine greeting functions into a single function
+        function greet(greeting){
+            // get names
+            firstName = document.querySelector("#input-firstname").value.trim() || "Peter";
+            lastName = document.querySelector("#input-lastname").value.trim() || "Parker";
+
+            console.log(firstName, lastName);
+
+            // get output
+            const output = document.querySelector("#output");
+            output.innerHTML = `${greeting} ${firstName} ${lastName}`;
+        }
+
+    }
+
+    </script>
+    
+  </head>
+<body>
+  <button id="btn-hello">Say Hello!</button>
+  <button id="btn-goodbye">Say Goodbye!</button>
+
+  <hr>
+
+  <input id="input-firstname" placeholder="Type in your first name">
+  <input id="input-lastname" placeholder="Type in your last name">
+  <p id="output">???</p>
+</body>
+</html>
