@@ -16,6 +16,10 @@ function init()
     const button = document.querySelector("#myButton");
     const output = document.querySelector("#output");
 
+    // get babble on page load
+    getBabble();
+
+    // add getBabble to button click event
     button.addEventListener("click", getBabble);
 
     // helper function that gets a random element from an array
