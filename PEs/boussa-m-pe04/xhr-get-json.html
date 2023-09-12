@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	<title>XHR - Load JSON</title>
+	<style>
+	body{
+	  font-family: sans-serif;
+	}
+	</style>
+
+</head>
+<body>
+	<h2>XHR - Load JSON File</h2>
+	
+	<hr>
+	<button id="my-button">Load Data</button>
+	<p id="output">Click button to load</p>
+	
+
+<script>
+
+    document.querySelector("#my-button").onclick = loadJsonXHR;
+
+    function loadJsonXHR(){
+        const url = "data/pet-names.json";
+        const xhr = new XMLHttpRequest();
+        xhr.onload = (e) => {
+            console.log(`In onload - HTTP Status Code = ${e.target.status}`);
+            const text = e.target.responseText;
+            let json;
+
+            // guard code using try/catch block
+            try{
+                json = JSON.parse(text);
+            }
+            catch{
+                document.querySelector("#output").innerHTML = "JSON.parse() failed";
+                return;
+            }
+
+            // declare array variables
+            const dogNames = json.dognames;
+            const catNames = json.catnames;
+            const birdNames = json.birdnames;
+
+            const dogHtml = dogNames.map(w => `<li>${w}</li>`).join("");
+            const catHtml = catNames.map(w => `<li>${w}</li>`).join("");
+            const birdHtml = birdNames.map(w => `<li>${w}</li>`).join("");
+
+            const html = `
+                <h3>Dog Names</h3>
+                ${dogHtml}
+                <h3>Cat Names</h3>
+                ${catHtml}
+                <h3>Bird Names</h3>
+                ${birdHtml}
+            `;
+
+            document.querySelector("#output").innerHTML = `<ol>${html}</ol>`;
+            
+
+        };
+        xhr.onerror = e => console.log(`In onerror - HTTP Status Code = ${e.target.status}`);
+        xhr.open("GET", url);
+        xhr.send();
+    }
+
+</script>
+</body>
+</html>

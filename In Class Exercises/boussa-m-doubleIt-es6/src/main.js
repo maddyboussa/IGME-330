@@ -1,4 +1,16 @@
-import {doubleIt} from "./utils.js"
+//import {doubleIt} from "./utils.js"
+//import doubleIt from "./utils.js"
+
+// you need to import it differently if you are using default
+// you remove {} since you are only importing one thing
+// you can also change the name of the function you are importing in here if you want, again since only exporting/importing one thing
+
+
+// you can also import a namespace, to import all functions that meet the criteria
+// imports all public functions from utils, using a namespace called utils (you can choose name)
+import * as utils from "./utils.js"
+
+// you can access utils functions using utils.functionName
 
 const init = () => {
   // hook up UI
@@ -10,7 +22,7 @@ const init = () => {
     // the .value of an <input> element are always of type `String`
     // so we need to convert it to a `Number`
     const num = Number(numberField.value.trim()) || 0;
-    const doubledNum = doubleIt(num);
+    const doubledNum = utils.doubleIt(num);
     output.innerHTML = `${num} doubled is ${doubledNum}`;
   };
 };
