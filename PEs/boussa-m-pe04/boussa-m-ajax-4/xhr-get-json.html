@@ -40,23 +40,16 @@
                 return;
             }
 
-            // declare array variables
-            const dogNames = json.dognames;
-            const catNames = json.catnames;
-            const birdNames = json.birdnames;
-
-            const dogHtml = dogNames.map(w => `<li>${w}</li>`).join("");
-            const catHtml = catNames.map(w => `<li>${w}</li>`).join("");
-            const birdHtml = birdNames.map(w => `<li>${w}</li>`).join("");
-
-            const html = `
-                <h3>Dog Names</h3>
-                ${dogHtml}
-                <h3>Cat Names</h3>
-                ${catHtml}
-                <h3>Bird Names</h3>
-                ${birdHtml}
-            `;
+            // loop through array of json keys
+            const keys = Object.keys(json);
+            let html = "";
+            for (let k of keys)
+            {
+                console.log(json[k]); // logs the json objects associated with each key
+                const obj = json[k];
+                html += `<h3>${obj.title}</h3>`;
+                html +=`<ol>${obj.namelist.map(w => `<li>${w}</li>`).join("")}</ol>`
+            }
 
             document.querySelector("#output").innerHTML = `<ol>${html}</ol>`;
             
