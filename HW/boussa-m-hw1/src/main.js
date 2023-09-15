@@ -1,23 +1,14 @@
-const words1 = ["Acute", "Aft", "Anti-matter", "Bipolar", "Cargo", "Command", "Communication", "Computer", "Deuterium", "Dorsal", "Emergency", "Engineering", "Environmental", "Flight", "Fore", "Guidance", "Heat", "Impulse", "Increased", "Inertial", "Infinite", "Ionizing", "Isolinear", "Lateral", "Linear", "Matter", "Medical", "Navigational", "Optical", "Optimal", "Optional", "Personal", "Personnel", "Phased", "Reduced", "Science", "Ship's", "Shuttlecraft", "Structural", "Subspace", "Transporter", "Ventral"];
-   
-const words2 = ["Propulsion", "Dissipation", "Sensor", "Improbability", "Buffer", "Graviton", "Replicator", "Matter", "Anti-matter", "Organic", "Power", "Silicon", "Holographic", "Transient", "Integrity", "Plasma", "Fusion", "Control", "Access", "Auto", "Destruct", "Isolinear", "Transwarp", "Energy", "Medical", "Environmental", "Coil", "Impulse", "Warp", "Phaser", "Operating", "Photon", "Deflector", "Integrity", "Control", "Bridge", "Dampening", "Display", "Beam", "Quantum", "Baseline", "Input"];
-            
-const words3 = ["Chamber", "Interface", "Coil", "Polymer", "Biosphere", "Platform", "Thruster", "Deflector", "Replicator", "Tricorder", "Operation", "Array", "Matrix", "Grid", "Sensor", "Mode", "Panel", "Storage", "Conduit", "Pod", "Hatch", "Regulator", "Display", "Inverter", "Spectrum", "Generator", "Cloud", "Field", "Terminal", "Module", "Procedure", "System", "Diagnostic", "Device", "Beam", "Probe", "Bank", "Tie-In", "Facility", "Bay", "Indicator", "Cell"];
+import {getRandElement} from "./utils.js";
+
+// declare babble array variables
+let words1;
+let words2;
+let words3; 
 
 // get references to html elements
 const button = document.querySelector("#mybutton");
 const buttonMore = document.querySelector("#morebutton");
 const output = document.querySelector("#output");
-
-// add getBabble to button click event\
-button.onclick = () => generateTechno(1);
-buttonMore.onclick = () => generateTechno(5);
-
-// helper function that gets a random element from an array
-const getRandElement = (array) =>{
-    const randomWord = array[Math.floor(Math.random() * array.length)];
-    return randomWord;
-}
 
 const getBabble = () =>{
 
@@ -35,7 +26,7 @@ const getBabble = () =>{
     output.innerHTML += babble + "<br>";
 }
 
-// generates a certain amount of techno based on input
+// generates a certain amount of technobabble based on input
 const generateTechno = (num) =>{
     // clear previous technobabble
     output.innerHTML= "";
@@ -45,6 +36,45 @@ const generateTechno = (num) =>{
         getBabble();
     }
 }
-    
-// get babble on page load
-generateTechno(1);
+
+// parsed the json babble
+const babbleLoaded = (e) =>{
+    let json;
+
+    // guard code using try/catch block
+    try{
+        json = JSON.parse(e.target.responseText);
+    }
+    catch{
+        document.querySelector("#output").innerHTML = "JSON.parse() failed";
+        return;
+    }
+
+    // parse technobabble into usable arrays
+    words1 = json.words1;
+    words2 = json.words2;
+    words3 = json.words3;
+
+    // initialize button click events
+    button.onclick = () => generateTechno(1);
+    buttonMore.onclick = () => generateTechno(5);
+
+    //get babble on page load
+    generateTechno(1);
+}
+
+// start xhr load event
+const loadBabble = () =>{
+    const url = "data/babble-data.json";
+    const xhr = new XMLHttpRequest();
+    xhr.onload = (e) =>{
+        console.log(`In onload - HTTP Status Code = ${e.target.status}`);
+        babbleLoaded(e);
+    }
+    xhr.onerror = e => console.log(`In onerror - HTTP Status Code = ${e.target.status}`);
+    xhr.open("GET", url);
+    xhr.send();
+}
+
+// called after page loads
+loadBabble();
