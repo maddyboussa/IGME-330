@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	<title>3B Quiz</title>
+
+</head>
+
+<script>
+
+    window.onload = init;
+    function init(){
+        const colors = "red,green,blue";
+        // question 1
+        // const colorArray = colors.split(",");
+        // let html = "<ol>";
+        // for (let c of colorArray){
+        // html += `<li>${c}</li>`;
+        // }
+        // html += "</ol>";
+        // document.querySelector("#output").innerHTML = html;
+        
+        const colorArray = colors.split(",");
+        const html = colorArray.map(c => `<li>${c}</li>`).join("");
+        document.querySelector("#output").innerHTML = `<ol>${html}</ol>`;
+    }
+    
+    
+</script>
+<body>
+    <div id="output"></div>
+</body>
+
+</html>
