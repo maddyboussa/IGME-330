@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>First Canvas</title>
+	<style>
+	canvas{
+		border:1px solid gray;
+	}
+	</style>
+	<script>
+
+		"use strict";
+		
+		// #1 call the `init` function after the pages loads
+		window.onload = init;
+	
+		function init(){
+			console.log("page loaded!");
+			// #2 Now that the page has loaded, start drawing!
+			
+			// A - `canvas` variable points at <canvas> tag
+			let canvas = document.querySelector("canvas");
+			
+			// B - the `ctx` variable points at a "2D drawing context"
+			let ctx = canvas.getContext("2d");
+			
+			// C - all fill operations are now in red
+			ctx.fillStyle = "red"; 
+			
+			// D - fill a rectangle with the current fill color
+			ctx.fillRect(20,20,600,440); 
+
+            // #4 - add a 400 x 300 rect
+            ctx.strokeStyle = "blue";
+            ctx.lineWidth = 3;
+            //              x,  y,    w,   h
+            ctx.strokeRect(120, 120, 400, 300);
+
+            // #5 - add more rectangles
+            // ctx.fillStyle = "green";
+            // ctx.fillRect(200, 200, 50, 80);
+
+            // ctx.fillStyle = "yellow";
+            // ctx.fillRect(300, 300, 50, 80);
+
+            // CANVAS 2
+
+            // create a rectangle path
+            ctx.fillStyle = "magenta";
+            ctx.strokeStyle = "black";
+            ctx.beginPath();
+            ctx.rect(200, 200, 200, 200);
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+
+		}
+	</script>
+</head>
+<body>
+	<canvas width="640" height="480">
+		Get a real browser!
+	</canvas>
+</body>
+</html>
