@@ -44,7 +44,7 @@
             // ctx.fillStyle = "yellow";
             // ctx.fillRect(300, 300, 50, 80);
 
-            // CANVAS 2
+            // CS CANVAS 2
 
             // create a rectangle path
             ctx.fillStyle = "magenta";
@@ -55,6 +55,60 @@
             ctx.fill();
             ctx.stroke();
 
+			// create lines
+			ctx.beginPath();
+			ctx.moveTo(20, 20);
+			ctx.lineTo(620, 460);
+			ctx.closePath();
+			ctx.lineWidth = 10;
+			ctx.stroke();
+
+			ctx.beginPath();
+			ctx.moveTo(20, 460);
+			ctx.lineTo(620, 20);
+			ctx.closePath();
+			ctx.stroke();
+
+			// create circle
+			ctx.fillStyle = "blue";
+			ctx.lineWidth = 5;
+			ctx.beginPath();
+			ctx.arc(320, 240, 50, 0, Math.PI * 2, false);
+			ctx.closePath();
+			ctx.fill();
+            ctx.stroke();
+
+			// semi circle
+			ctx.fillStyle = "teal";
+			ctx.lineWidth = 5;
+			ctx.beginPath();
+			ctx.arc(320, 240, 20, 0, Math.PI, false);
+			ctx.closePath();
+			ctx.fill();
+            ctx.stroke();
+
+			// small circles
+			ctx.fillStyle = "black";
+			ctx.beginPath();
+			ctx.arc(300, 220, 15, 0, Math.PI * 2, false);
+			ctx.closePath();
+			ctx.fill();
+            ctx.stroke();
+
+			ctx.beginPath();
+			ctx.arc(340, 220, 15, 0, Math.PI * 2, false);
+			ctx.closePath();
+			ctx.fill();
+            ctx.stroke();
+
+			// additional line
+			ctx.strokeStyle = "orange";
+			ctx.lineWidth = 20;
+			ctx.beginPath();
+			ctx.moveTo(20, 400);
+			ctx.lineTo(620, 400);
+			ctx.closePath();
+			ctx.stroke();
 		}
 	</script>
 </head>
