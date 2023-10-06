@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Sine Start</title>
+	<style>canvas{ border: 1px solid black; }</style>
+	<script>
+	"use strict";
+	const canvasWidth = 600, canvasHeight = 500;
+	let ctx;
+
+    // tracks generation of each dot
+    let n = 0;
+    const divergence = 137.5;
+    let c = 4;
+    let color = "white";
+    let fps = 60;
+    let radius = 2;
+
+    let userChoice = "1";
+
+    window.onload = init;
+
+	function init(){
+		ctx = canvas.getContext("2d");
+		canvas.width = canvasWidth;
+		canvas.height = canvasHeight;
+		ctx.fillRect(0,0,canvasWidth,canvasHeight);
+
+        setup();
+        loop();
+	}
+
+    function loop(){
+        setTimeout(loop,1000/fps);
+        
+        // each frame draw a new dot
+        // `a` is the angle
+        // `r` is the radius from the center (e.g. "Pole") of the flower
+        // `c` is the "padding/spacing" between the dots
+        let a = n * dtr(divergence);
+        let r = c * Math.sqrt(n);
+        //console.log(a,r);
+
+        // increment c
+        c += 0.01;
+
+        // calculate x and y
+        // now calculate the `x` and `y`
+        let x = r * Math.cos(a) + canvasWidth/2;
+        let y = r * Math.sin(a) + canvasHeight/2;
+        //console.log(x,y);
+
+        // draw dots
+
+        let aDegrees;
+        // set color based on selected color mode
+        switch(userChoice)
+        {
+            case "1":
+                //change color based on age of dot
+                color = `rgb(${n % 256},0,255)`;
+                break;
+
+            case "2":
+                // change color based on divergence angle
+                aDegrees = (n * divergence) % 256;
+                color = `rgb(${aDegrees},0,255)`;
+                break;
+
+            case "3":
+                // change color hue based on age of dot
+                color = `hsl(${n/5 % 361},100%,50%)`;
+                break;
+
+            case "4":
+                // change color based on hsl hue and angle
+                aDegrees = (n * divergence) % 361;
+                color = `hsl(${aDegrees},100%,50%)`;
+                break;
+        }
+
+        drawCircle(ctx, x, y, radius, color);
+
+        n++;
+    }
+
+    // hook up html controls to js
+    function setup(){
+
+        // dropdown functionality
+        document.querySelector("#ctrl-mode").onchange = function(e){
+            // sets user choice based on dropdown value
+            userChoice = e.target.value;
+        }
+
+        // restart functionality
+        document.querySelector("#btn-restart").onclick = function(){
+            // clear screen
+            ctx.save();
+            ctx.fillStyle = "black";
+            ctx.fillRect(0,0,canvasWidth,canvasHeight);
+            ctx.restore();
+
+            // reset variables
+            c = 4;
+            n = 0;
+            color = "white";
+        };
+    }
+
+	// helpers
+	function dtr(degrees){
+		return degrees * (Math.PI/180);
+	}
+
+	function drawCircle(ctx,x,y,radius,color){
+		ctx.save();
+		ctx.fillStyle = color;
+		ctx.beginPath();
+		ctx.arc(x,y,radius,0,Math.PI * 2);
+		ctx.closePath();
+		ctx.fill();
+		ctx.restore();
+	}
+
+	</script>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+<div id="controls">
+	<label>Color Mode Options:</label>
+	<select id="ctrl-mode">
+		<option value=1 selected>Age</option>
+		<option value=2>Divergence Angle</option>
+		<option value=3>Hue and Age</option>
+		<option value=4>Hue and Angle</option>
+	</select>
+	<button id="btn-restart">Restart App</button>
+</div>
+
+<h2>About This App</h2>
+<p>The pulldown menu allows the users to change the mode of altering the dots' color.</p>
+<ul>
+    <li>Age - color alters over time based on the age of the dot</li>
+    <li>Divergence Angle - color is determined based on the angle of the dot</li>
+    <li>Hue and Age - Hue shifts based on the age of the dot</li>
+    <li>Hue and Angle - Hue shifts based on the aangle of the dot</li>
+</ul>
+<p>Restart App - allows users to clear the screen</p>
+<p>Changes made from the starter code:</p>
+<ul>
+    <li>Increased frame rate to 60 fps</li>
+    <li>Increased canvas size to 600 x 500</li>
+    <li>C value starts at 4 and increments by 0.01 each iteration of the loop</li>
+</ul>
+
+</body>
+</html>
