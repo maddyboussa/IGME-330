@@ -16,7 +16,9 @@ const drawParams = {
   showGradient : true,
   showBars : true,
   showCircles : true,
-  showNoise : true
+  showNoise : false,
+  showInvert : false,
+  showEmboss : false
 };
 
 // 1 - here we are faking an enumeration
@@ -99,6 +101,9 @@ function setupUI(canvasElement){
   let gradientCB = document.querySelector("#gradientCB");
   let barsCB = document.querySelector("#barsCB");
   let circlesCB = document.querySelector("#circlesCB");
+  let noiseCB = document.querySelector("#noiseCB");
+  let invertCB = document.querySelector("#invertCB");
+  let embossCB = document.querySelector("#embossCB");
 
   gradientCB.onchange = e => {
     drawParams.showGradient = gradientCB.checked;
@@ -110,6 +115,18 @@ function setupUI(canvasElement){
 
   circlesCB.onchange = e => {
     drawParams.showCircles = circlesCB.checked;
+  }
+
+  noiseCB.onchange = e => {
+    drawParams.showNoise = noiseCB.checked;
+  }
+
+  invertCB.onchange = e => {
+    drawParams.showInvert = invertCB.checked;
+  }
+
+  embossCB.onchange = e => {
+    drawParams.showEmboss = embossCB.checked;
   }
 	
 } // end setupUI
