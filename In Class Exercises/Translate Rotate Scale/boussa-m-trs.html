@@ -18,12 +18,19 @@
 		
         let ctx = document.querySelector('canvas').getContext('2d');
         let rotation = 0;
+		let scale = 0;
 
 		loop();
 	
 		function loop(){
 			requestAnimationFrame(loop);
             rotation += 0.05;
+			scale += 0.1;
+
+			// reverse scale when it becomes too large
+			if (scale >= 6) {
+				scale = -scale;
+			}
 
 			// background
 			ctx.fillStyle = 'yellow'; 
@@ -50,6 +57,12 @@
             drawSquare2(ctx,200,100,100,100,rotation,"purple",0.75);
             drawSquare2(ctx,350,100,100,100,rotation,"purple",1.0);
             drawSquare2(ctx,500,100,100,100,rotation,"purple",1.25);
+
+			// draw square with altering scale
+			drawSquare2(ctx,100,400,10,10,0,"pink",scale);
+			
+			// draw triangle using helper function
+			drawTriangle(ctx,300,300,50,20,"blue","blue",5,rotation);
 	
 			//do some transformations?
             ctx.save();
@@ -122,6 +135,25 @@
             // the old state attributes are restored, ctx is 
             // as it was before this function was called
         }
+
+		function drawTriangle(ctx,x,y,width,height,strokeStyle,fillStyle,lineWidth,rotation){
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.rotate(rotation);
+
+			ctx.strokeStyle=strokeStyle;
+            ctx.fillStyle=fillStyle;
+            ctx.lineWidth=lineWidth;
+
+            ctx.beginPath();
+            ctx.moveTo(0,-width);
+            ctx.lineTo(width,height);
+            ctx.lineTo(-height,width);
+            ctx.closePath();
+            ctx.stroke();
+			ctx.fill();
+            ctx.restore();
+		}
 
 	</script>
 </body>
