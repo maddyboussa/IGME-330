@@ -5,10 +5,6 @@ export class CircleSprite{
         Object.assign(this, {x, y, radius, color});
     }
     
-    update(){
-
-    }
-    
     draw(ctx){
         ctx.save();
         ctx.fillStyle = this.color;

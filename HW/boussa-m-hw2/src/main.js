@@ -13,17 +13,11 @@ import * as canvas from './canvas.js';
 
 // iniialize drawParams object
 const drawParams = {
-    showGradient : true,
-    showBars : true,
-    showCircles : true,
-    showNoise : false,
-    showInvert : false,
-    showEmboss : false,
-
-    visMethod : 1   // 1 stands for frequency data, 2 stands for waveform data
+    visMethod : 1,   // 1 stands for frequency data, 2 stands for waveform data
+    drawMethod : "circles"
 };
 
-// 1 - here we are faking an enumeration
+//here we are faking an enumeration
 const DEFAULTS = Object.freeze({
 	sound1  :  "media/AAA_Powerline.mp3"
 });
@@ -106,6 +100,12 @@ const setupUI = (canvasElement) =>{
   let visualizationSelect = document.querySelector("#vis-select");
   visualizationSelect.onchange = e => {
       drawParams.visMethod = e.target.value;
+  }
+
+  // hookup draw method selector
+  let drawSelect = document.querySelector("#draw-select");
+  drawSelect.onchange = e => {
+        drawParams.drawMethod = e.target.value;
   }
 
   // hookup bass and treble sliders

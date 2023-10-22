@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Ecco2K Audio Visualizer</title>
+  <title></title>
   <link href="./styles/default-styles.css" type="text/css" rel="stylesheet" />
   <script src="./src/loader.js" type="module"></script>
   <link rel="icon" type="image/x-icon" href="e_favicon.png">
@@ -45,13 +45,7 @@
         <div id="track">
             <label>Track: 
                 <select id="track-select">
-                  <option value="media/AAA_Powerline.mp3" selected>AAA Powerline</option>
-                  <option value="media/Calcium.mp3">Calcium</option>
-                  <option value="media/Lip_Service.mp3">Lip Service</option>
-                  <option value="media/Obedient.mp3">Obedient</option>
-                  <option value="media/Peroxide.mp3">Peroxide</option>
-                  <option value="media/Vanilla_Sky.mp3">Vanilla Sky</option>
-                  <option value="media/White_Meadow.mp3">White Meadow</option>
+                  
                 </select>
             </label>
         </div>
@@ -63,10 +57,20 @@
                 </select>
             </label>
         </div>
-        <div id="checkboxes">
-
+        <div id="draw">
+            <label>Draw Method: 
+                <select id="draw-select">
+                  <option value="circles" selected>Circles</option>
+                  <option value="bars">Bars</option>
+                  <option value="lines">Lines</option>
+                </select>
+            </label>
         </div>
     </div>
+  </div>
+
+  <div id="instructions">
+    <p id="instructions-text"></p>
   </div>
 </main>
 </body>

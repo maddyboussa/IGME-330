@@ -13,6 +13,10 @@ canvas {
     background: black;
     border: 2px solid white;
 }
+
+#instructions{
+    text-align: center;
+}
   
 #controls{
 
@@ -23,7 +27,7 @@ canvas {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    height: 170px;
+    height: 140px;
 }
 
 #sliders{
