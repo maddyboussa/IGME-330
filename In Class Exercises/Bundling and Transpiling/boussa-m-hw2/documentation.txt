@@ -1,0 +1,19 @@
+Created By: Madeline Boussa
+
+I. I added a biquad filter node for altering the highshelf, and a lowshelf biquad filter node for altering the lowshelf. These can be altered via sliders that control the
+    gain of the filter, create a sort of DJ-Table effect of slowing adjusting filter levels.
+
+II. I created 2 sprite classes. One is called CircleSprite and draws cirlces in the center of the canvas that pulse to the beat. The other class is called RectangleSprite, 
+    which is used to draw very thin bars that radiate out from the central circles.
+
+III. In my JSON file, I included data for the page title, audio tracks, number of tracks, and user instructions / greeting. The audio tracks are contained in an array, 
+    with each track having a corresponding object containing the file name, name of the track, and artist(s) for further organization. The number of tracks is recorded in order to 
+    better parse the JSON data.
+
+IV. I improved the overall aesthetics of the visualizer by streamlining and stylizing the UI. I went for a minimalist aesthetic, with black and white matching the album cover of 
+    Ecco2k's album titled "E". I improved the CSS of the canvas and UI by centering the canvas and the user controls below it. Utilizing flex proprties, I ensured that the control 
+    scheme was well laid out and easy to use. In terms of the aesthetics of the actual audio visualizations, I also went for a black and white minimalist theme, deviating heavily 
+    from the garish and jumbled starter visualizations. Aiming for trance-like visuals rather than overly chaotic ones, I feel as if I achieved a great balance between overstimulation 
+    and boredom. Additionally, I added a favicon image of the E album title for added detail.
+
+    For this segment, I would give myself a grade of 15% as I feel as if I adequately deviated from the starter code and created an app that is very visually pleasing.

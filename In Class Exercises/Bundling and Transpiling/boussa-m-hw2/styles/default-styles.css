@@ -1,0 +1,88 @@
+body {
+    background: #000000;
+    font-family: tahoma, verdana, sans serif;
+    color: white;
+}
+  
+canvas {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    background: black;
+    border: 2px solid white;
+}
+
+#instructions{
+    text-align: center;
+}
+
+#copyright{
+    text-align: center;
+}
+  
+#controls{
+
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height: 140px;
+}
+
+#sliders{
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2vh;
+    width: 600px;
+}
+
+#core-controls{
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2vh;
+    width: 500px;
+}
+
+#options{
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2vh;
+    width: 600px;
+}
+  
+#volumeLabel{
+    margin-left: 1rem;
+}
+  
+section{
+    margin-bottom: 1rem;
+}
+  
+#playButton{
+    font-size: 1.2rem;
+    width: 6rem;
+}
+  
+button[data-playing="yes"]:after{
+    content: "Pause";
+}
+  
+button[data-playing="no"]:after{
+    content: "Play";
+}
+  
+#fsButton{
+    font-size: 1.2rem;
+    width: 8rem;
+}
