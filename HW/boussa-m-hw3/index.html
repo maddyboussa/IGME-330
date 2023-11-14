@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title></title>
+  <link href="./styles/default-styles.css" type="text/css" rel="stylesheet" />
+  <script src="./src/loader.js" type="module"></script>
+  <link rel="icon" type="image/x-icon" href="e_favicon.png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+</head>
+<body class="has-background-black pb-3">
+<main class="has-text-white has-text-centered">
+    <!-- bulma header -->
+    <nav class="navbar has-shadow is-white mb-4">
+        <div class="navbar-brand">
+          <a class="navbar-item">
+            <img src="e_favicon.png" alt="site logo" style="max-height: 70px" class="py-2 px-2">
+          </a>
+          <a class="navbar-burger" id="burger">
+            <span></span>
+            <span></span>
+            <span></span>
+          </a>
+        </div>
+
+        <div class="navbar-menu" id="nav-links">
+            <div class="navbar-start">
+              <a href="about.html" class="navbar-item">About</a>
+              <a href="index.html" class="navbar-item"><p class="has-text-weight-bold">App</p></a>
+            </div>
+          </div>
+    </nav>
+
+  <canvas width="1500" height="700"></canvas>
+
+  <div id="controls" class="columns is-vcentered is-centered my-5 py-3">
+
+    <!-- controls for dj sliders -->
+    <div id="sliders" class="column is-3">
+        <section class="mb-5">
+            Treble Gain: <input type="range" id="slider-treble" min="0" max="20" value="0" step="1">
+            <span id="label-treble"></span>
+        </section>
+        <section>
+            Bass Gain: <input type="range" id="slider-bass" min="0" max="10" value="0" step="1">
+            <span id="label-bass"></span>
+        </section>
+    </div>
+
+    <!-- core controls of the song (play, pause, volume, etc.) -->
+    <div id="core-controls" class="column is-4">
+        <div id="controls-1">
+            <button id="btn-play" data-playing="no"></button>
+        </div>
+        <div id="controls-2">
+            <section class="my-5">
+                Volume: <input type="range" id="slider-volume" min="0" max="2" value="1" step="0.01">
+                <span id="label-volume"></span>
+            </section>
+        </div>
+        <div id="controls-3">
+            <button id="btn-fs">Full Screen</button>
+        </div>
+    </div>
+
+    <!-- additional options for users to control track and visuals -->
+    <div id="options" class="column is-3">
+        <div id="track">
+            <label>Track: 
+                <select id="track-select">
+                <!-- JSON will be loaded to poulate selector options here -->
+                </select>
+            </label>
+        </div>
+        <div id="visualization" class="my-5">
+            <label>Visualization Method: 
+                <select id="vis-select">
+                  <option value=1 selected>Frequency Data</option>
+                  <option value=2>Waveform Data</option>
+                </select>
+            </label>
+        </div>
+        <div id="draw">
+            <label>Draw Method: 
+                <select id="draw-select">
+                  <option value="circles" selected>Circles</option>
+                  <option value="bars">Bars</option>
+                  <option value="lines">Lines</option>
+                </select>
+            </label>
+        </div>
+    </div>
+  </div>
+
+  <div id="instructions">
+    <p id="instructions-text"></p>
+  </div>
+
+  <hr>
+  
+  <div id="copyright">
+    <p>Created By Madeline Boussa &emsp;Music &copy; Ecco2k</p>
+  </div>
+</main>
+</body>
+</html>

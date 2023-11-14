@@ -1,0 +1,62 @@
+{
+    "title" : "Ecco2k Audio Visualizer",
+    "tracks" : [
+        {
+            "file" : "AAA_Powerline.mp3",
+            "track" : "AAA Powerline",
+            "artist" : "Ecco2k"
+        },
+
+        {
+            "file" : "Calcium.mp3",
+            "track" : "Calcium",
+            "artist" : "Ecco2k"
+        },
+
+        {
+            "file" : "Lip_Service.mp3",
+            "track" : "Lip Service",
+            "artist" : "Ecco2k, Thaiboy Digital"
+        },
+
+        {
+            "file" : "Obedient.mp3",
+            "track" : "Obedient",
+            "artist" : "Ecco2k, Bladee"
+        },
+
+        {
+            "file" : "Peroxide.mp3",
+            "track" : "Peroxide",
+            "artist" : "Ecco2k"
+        },
+
+        {
+            "file" : "Vanilla_Sky.mp3",
+            "track" : "Vanilla Sky",
+            "artist" : "Ecco2k, Bladee"
+        },
+
+        {
+            "file" : "White_Meadow.mp3",
+            "track" : "White Meadow",
+            "artist" : "Ecco2k, Bladee"
+        },
+
+        {
+            "file" : "Girls_Just_Wanna_Have_Fun.mp3",
+            "track" : "Girls Just Wanna Have Fun",
+            "artist" : "Ecco2k, Bladee"
+        },
+
+        {
+            "file" : "Western_Union.mp3",
+            "track" : "Western Union",
+            "artist" : "Ecco2k, Bladee, Thaiboy Digital"
+        }
+    ],
+
+    "numTracks" : 9,
+
+    "instructions" : "Welcome to the Ecco2k Audio Visualizer! Feel free to change the track, visualization and draw methods, and alter the trebel and bass gain to get lost in the music."
+}
