@@ -1,11 +1,17 @@
 export class CircleSprite{
     static type = "arc";
-    constructor(x, y, radius, color){
+
+    x:number;
+    y:number;
+    radius:number;
+    color: CanvasRenderingContext2D;
+
+    constructor(x:number, y:number, radius:number, color){
         // initialize properties
         Object.assign(this, {x, y, radius, color});
     }
     
-    draw(ctx){
+    draw(ctx:CanvasRenderingContext2D){
         ctx.save();
         ctx.fillStyle = this.color;
         ctx.beginPath();

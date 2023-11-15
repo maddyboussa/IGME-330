@@ -1,4 +1,4 @@
-import * as main from "./main.js";
+import * as main from "./main";
 
 const loadJSON = () =>{
     const url = "data/av-data.json";
@@ -6,8 +6,9 @@ const loadJSON = () =>{
 
     // attempt to load xhr object
     xhr.onload = (e) => {
-        console.log(`In onload - HTTP Status Code = ${e.target.status}`);
-        const text = e.target.responseText;
+        const target = e.target as XMLHttpRequest;
+        console.log(`In onload - HTTP Status Code = ${target.status}`);
+        const text = target.responseText;
         let json;
 
         // guard code using try/catch block
@@ -49,7 +50,10 @@ const loadJSON = () =>{
         document.querySelector("#instructions-text").innerHTML = json.instructions;
 
     };
-    xhr.onerror = e => console.log(`In onerror - HTTP Status Code = ${e.target.status}`);
+    xhr.onerror = e => {
+        const target = e.target as XMLHttpRequest;
+        console.log(`In onerror - HTTP Status Code = ${target.status}`);
+    }
     xhr.open("GET", url);
     xhr.send();
 }

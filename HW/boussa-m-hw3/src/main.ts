@@ -7,20 +7,16 @@
 // In this instance, we feel the code is more readable if written this way
 // If you want to re-write these as ES6 arrow functions, to be consistent with the other files, go ahead!
 
-import * as utils from './utils.js';
-import * as audio from './audio.js';
-import * as canvas from './canvas.js';
+import * as utils from './utils';
+import * as audio from './audio';
+import * as canvas from './canvas';
+import { DEFAULTS } from './enums/defaults.enum';
 
 // iniialize drawParams object
-const drawParams = {
-    visMethod : 1,   // 1 stands for frequency data, 2 stands for waveform data
-    drawMethod : "circles"
+export const drawParams = {
+  visMethod : 1,   // 1 stands for frequency data, 2 stands for waveform data
+  drawMethod : "circles"
 };
-
-//here we are faking an enumeration
-const DEFAULTS = Object.freeze({
-	sound1  :  "media/AAA_Powerline.mp3"
-});
 
 const init = () =>{
 	// console.log("init called");
@@ -30,7 +26,7 @@ const init = () =>{
 	audio.setupWebaudio(DEFAULTS.sound1);
 
     // hookup canvas element
-    let canvasElement = document.querySelector("canvas");
+    let canvasElement = document.querySelector("canvas") as HTMLCanvasElement;
 
     // setup canvas and hookup ui
 	setupUI(canvasElement);
@@ -40,7 +36,7 @@ const init = () =>{
 
 const setupUI = (canvasElement) =>{
   // A - hookup fullscreen button
-  const fsButton = document.querySelector("#btn-fs");
+  const fsButton = document.querySelector("#btn-fs") as HTMLButtonElement;
 	
   // add .onclick event to button
   fsButton.onclick = e => {
@@ -49,46 +45,50 @@ const setupUI = (canvasElement) =>{
   };
 
   // add functionality to play buttpn
-  const playButton = document.querySelector("#btn-play");
+  const playButton = document.querySelector("#btn-play") as HTMLButtonElement;
   playButton.onclick = e => {
+
+    const target = e.target as HTMLInputElement;
     
     if (audio.audioCtx.state == "suspended") {
       audio.audioCtx.resume();
     }
 
     // play track if it is currently paused
-    if (e.target.dataset.playing == "no") {
+    if (target.dataset.playing == "no") {
       audio.playCurrentSound();
-      e.target.dataset.playing = "yes";
+      target.dataset.playing = "yes";
     }
     // else pause the current sound
     else{
       audio.pauseCurrentSound();
-      e.target.dataset.playing = "no";
+      target.dataset.playing = "no";
     }
   };
 
   // hookup volume slider and label
-  let volumeSlider = document.querySelector("#slider-volume");
-  let volumeLabel = document.querySelector("#label-volume");
+  let volumeSlider = document.querySelector("#slider-volume") as HTMLInputElement;
+  let volumeLabel = document.querySelector("#label-volume") as HTMLLabelElement;
 
   // add .oninput event to slider
   volumeSlider.oninput = e => {
+    const target = e.target as HTMLInputElement;
     // set the gain
-    audio.setVolume(e.target.value);
+    audio.setVolume(target.value);
     // update the value of the lable to match slider
-    volumeLabel.innerHTML = Math.round(e.target.value / 2 * 100);
+    volumeLabel.innerHTML = Math.round(Number(target.value) / 2 * 100).toString();
   };
 
   // set value of label to match initial value of slider
   volumeSlider.dispatchEvent(new Event("input"));
 
   // hookup track select
-  let trackSelect = document.querySelector("#track-select");
+  let trackSelect = document.querySelector("#track-select") as HTMLInputElement;
 
   // add .onchange event
   trackSelect.onchange = e => {
-    audio.loadSoundFile(e.target.value);
+    const target = e.target as HTMLInputElement;
+    audio.loadSoundFile(target.value);
 
     // pause track if it is currently playing
     if (playButton.dataset.playing == "yes"){
@@ -97,48 +97,51 @@ const setupUI = (canvasElement) =>{
   };
 
   // hookup visualization selector
-  let visualizationSelect = document.querySelector("#vis-select");
+  let visualizationSelect = document.querySelector("#vis-select") as HTMLInputElement;
   visualizationSelect.onchange = e => {
-      drawParams.visMethod = e.target.value;
+    const target = e.target as HTMLInputElement;
+      drawParams.visMethod = Number(target.value);
   }
 
   // hookup draw method selector
-  let drawSelect = document.querySelector("#draw-select");
+  let drawSelect = document.querySelector("#draw-select") as HTMLInputElement;
   drawSelect.onchange = e => {
-        drawParams.drawMethod = e.target.value;
+    const target = e.target as HTMLInputElement;
+        drawParams.drawMethod = target.value;
   }
 
   // hookup bass and treble sliders
-  let trebleSlider = document.querySelector("#slider-treble");
-  let trebleLable = document.querySelector("#label-treble");
+  let trebleSlider = document.querySelector("#slider-treble") as HTMLInputElement;
+  let trebleLable = document.querySelector("#label-treble") as HTMLLabelElement;
   trebleSlider.oninput = e => {
+    const target = e.target as HTMLInputElement;
     // set the gain for the highshelf filter
-    audio.setHighshelfGain(e.target.value);
+    audio.setHighshelfGain(target.value);
 
     // update the value of the lable to match slider
-    trebleLable.innerHTML = Math.round(e.target.value);
+    trebleLable.innerHTML = Math.round(Number(target.value)).toString();
   };
   trebleSlider.dispatchEvent(new Event("input"));
 
-  let bassSlider = document.querySelector("#slider-bass");
-  let bassLabel = document.querySelector("#label-bass");
+  let bassSlider = document.querySelector("#slider-bass") as HTMLInputElement;
+  let bassLabel = document.querySelector("#label-bass") as HTMLLabelElement;
   bassSlider.oninput = e => {
+    const target = e.target as HTMLInputElement;
     // set the gain for the lowshelf filter
-    audio.setLowshelfGain(e.target.value);
+    audio.setLowshelfGain(target.value);
 
     // update the value of the lable to match slider
-    bassLabel.innerHTML = Math.round(e.target.value);
+    bassLabel.innerHTML = Math.round(Number(target.value)).toString();
   };
   bassSlider.dispatchEvent(new Event("input"));
 
   // mobile menu
-  const burgerIcon = document.querySelector("#burger");
+  const burgerIcon = document.querySelector("#burger") as HTMLButtonElement;
   const navbarMenu = document.querySelector("#nav-links");
 
   burgerIcon.onclick = () => {
     navbarMenu.classList.toggle("is-active");
   }
-	
 }
 
 const loop = () =>{

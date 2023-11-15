@@ -1,7 +1,8 @@
 
-import * as utils from './utils.js';
-import { CircleSprite } from './CircleSprite.js';
-import { RectangleSprite } from './RectangleSprite.js';
+import * as utils from './utils';
+import { CircleSprite } from './classes/CircleSprite';
+import { RectangleSprite } from './classes/RectangleSprite';
+import { DrawParams } from './interfaces/drawParams.interface';
 
 let ctx,canvasWidth,canvasHeight,gradient,analyserNode,audioData;
 
@@ -34,7 +35,7 @@ const setupCanvas = (canvasElement,analyserNodeRef) =>{
     middleX = canvasHeight / 2;
 }
 
-const draw = (params={}) =>{
+const draw = (params:DrawParams) =>{
 
     // load audioData array based on visualization method selected
     if (params.visMethod == 1)

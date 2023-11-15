@@ -1,8 +1,8 @@
 
-let audioCtx;
+let audioCtx:AudioContext;
 
 // we will be exporting these variables
-let element, sourceNode, analyserNode, gainNode;
+let element:HTMLAudioElement, sourceNode:MediaElementAudioSourceNode, analyserNode, gainNode;
 
 let biquadFilter, lowShelfBiquadFilter;
 
@@ -12,13 +12,9 @@ const DEFAULTS = Object.freeze({
     numSamples : 256
 });
 
-// create a new array of 8-bit integers (0-255)
-// this is a typed array to hold the audio frequency data
-let audioData = new Uint8Array(DEFAULTS.numSamples / 2);
-
 // set up web audio api
-const setupWebaudio = (filePath) =>{
-    const AudioContext = window.AudioContext || window.webkitAudioContext;
+const setupWebaudio = (filePath:string) =>{
+    const AudioContext = window.AudioContext;
     audioCtx = new AudioContext();
 
     // creates an <audio> element
@@ -59,7 +55,7 @@ const setupWebaudio = (filePath) =>{
     gainNode.connect(audioCtx.destination);
 }
 
-const loadSoundFile = (filePath) =>{
+const loadSoundFile = (filePath:string) =>{
     element.src = filePath;
 }
 
@@ -71,18 +67,15 @@ const pauseCurrentSound = () =>{
     element.pause();
 }
 
-const setVolume = (value) =>{
-    value = Number(value);  // make sure that it's a Number rather than a String
+const setVolume = (value:string) =>{
     gainNode.gain.value = value;
 }
 
-const setHighshelfGain = (value) =>{
-    value = Number(value);
+const setHighshelfGain = (value:string) =>{
     biquadFilter.gain.setValueAtTime(value, audioCtx.currentTime);
 }
 
-const setLowshelfGain = (value) =>{
-    value = Number(value);
+const setLowshelfGain = (value:string) =>{
     lowShelfBiquadFilter.gain.setValueAtTime(value, audioCtx.currentTime);
 }
 
