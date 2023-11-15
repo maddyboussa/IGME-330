@@ -4,9 +4,9 @@ export class CircleSprite{
     x:number;
     y:number;
     radius:number;
-    color: CanvasRenderingContext2D;
+    color: string;
 
-    constructor(x:number, y:number, radius:number, color){
+    constructor(x:number, y:number, radius:number, color:string){
         // initialize properties
         Object.assign(this, {x, y, radius, color});
     }

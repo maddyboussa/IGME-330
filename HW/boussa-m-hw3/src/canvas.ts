@@ -4,16 +4,16 @@ import { CircleSprite } from './classes/CircleSprite';
 import { RectangleSprite } from './classes/RectangleSprite';
 import { DrawParams } from './interfaces/drawParams.interface';
 
-let ctx,canvasWidth,canvasHeight,gradient,analyserNode,audioData;
+let ctx:CanvasRenderingContext2D,canvasWidth:number,canvasHeight:number,analyserNode,audioData;
 
-let maxRadius;
-let middleY;
-let middleX;
+let maxRadius:number;
+let middleY:number;
+let middleX:number;
 
 // declare circles
-let circle1, circle2
+let circle1:CircleSprite, circle2:CircleSprite
 
-const setupCanvas = (canvasElement,analyserNodeRef) =>{
+const setupCanvas = (canvasElement:HTMLCanvasElement,analyserNodeRef) =>{
 	// create drawing context
 	ctx = canvasElement.getContext("2d");
 	canvasWidth = canvasElement.width;

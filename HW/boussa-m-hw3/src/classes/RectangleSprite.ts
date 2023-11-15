@@ -4,9 +4,9 @@ export class RectangleSprite{
     y:number;
     width:number;
     height:number;
-    color: CanvasRenderingContext2D;
+    color: string;
 
-    constructor(x:number, y:number, width:number, height:number, color){
+    constructor(x:number, y:number, width:number, height:number, color:string){
         // initialize properties
         Object.assign(this, {x, y, width, height, color});
     }

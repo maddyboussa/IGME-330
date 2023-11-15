@@ -11,9 +11,10 @@ import * as utils from './utils';
 import * as audio from './audio';
 import * as canvas from './canvas';
 import { DEFAULTS } from './enums/defaults.enum';
+import { DrawParams } from './interfaces/drawParams.interface';
 
 // iniialize drawParams object
-export const drawParams = {
+export const drawParams:DrawParams = {
   visMethod : 1,   // 1 stands for frequency data, 2 stands for waveform data
   drawMethod : "circles"
 };
@@ -34,7 +35,7 @@ const init = () =>{
     loop();
 }
 
-const setupUI = (canvasElement) =>{
+const setupUI = (canvasElement:HTMLCanvasElement) =>{
   // A - hookup fullscreen button
   const fsButton = document.querySelector("#btn-fs") as HTMLButtonElement;
 	
