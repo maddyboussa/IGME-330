@@ -1,0 +1,13 @@
+Created By: Madeline Boussa
+
+- Coded in Typescript
+
+- Changes I Made:
+	- I converted all the .js filetypes to .ts
+	- I strongly typed function parameters in all .ts files
+	- I also strongly typed variables in .ts
+	- I created an enum for DEFAULTS which stores the default values of the webpage, and moved this code into a separate defaults.enum.ts file
+	- Similarly, I created a typescript interface for drawParams and moved that code into its own interface.ts file
+	- The enum and interface files are imported where necessary
+	- Strongly typed both the CirlceSprite and RectangleSprite classes
+	- Fixed some errors due to typing and variable casting, most notably with functionality requiring use of .innerHTML
