@@ -37,10 +37,6 @@ const initMap = (center) => {
 		zoom: 5.2
 	});
 	map.addControl(new mapboxgl.NavigationControl({showCompass:false}));
-
-	// test
-	// const clickHandler = (id) => alert(`${id} was clicked!`);
-	// addMarker(geojson.features[0], "poi", clickHandler);
 };
 
 const addMarker = (feature, className, clickHandler) => {
