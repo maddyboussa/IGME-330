@@ -1,12 +1,15 @@
 import * as map from "./map.js";
 import * as ajax from "./ajax.js";
+import * as storage from "./storage.js";
+import * as firebase from "./firebase.js";
 
 // I. Variables & constants
+
 // NB - it's easy to get [longitude,latitude] coordinates with this tool: http://geojson.io/
 const lnglatNYS = [-75.71615970715911, 43.025810763917775];
 const lnglatUSA = [-98.5696, 39.8282];
 let geojson;
-let favoriteIds = ["p20","p79","p180","p43"];
+let favoriteIds;
 let currentId = "";
 
 // II. Functions
@@ -44,20 +47,33 @@ const setupUI = () => {
 		favoriteIds.push(currentId);
 
 		refreshButtons(currentId);
+
+		// write new favorites list to local storage
+		storage.writeToLocalStorage("favs", favoriteIds);
+
+		// push favorite to firebase
+		firebase.pushFavoriteToCloud(currentId, 1);
 	}
 
 	// delete button
 	document.querySelector("#btn-delete").onclick = () => {
 		console.log("delete clicked");
 
-		// reomve favorite element for this
-
 		// remove this id from the favoriteIds list
+		removeFromFavoritesArray(currentId);
+
+		// update buttons and favorites list accordingly
+		refreshButtons(currentId);
+		refreshFavorites();
+
+		// write new favorites list to local storage
+		storage.writeToLocalStorage("favs", favoriteIds);
+
+		// push favorite to firebase
+		firebase.pushFavoriteToCloud(currentId, -1);
 	}
 
-
 	refreshFavorites();
-
 }
 
 const getFeatureById = (id) => {
@@ -91,7 +107,7 @@ const showFeatureDetails = (id) => {
 	currentId = id;
 
 	refreshButtons(id);
-};
+}
 
 const refreshButtons = (id) => {
 	// show appropriate favorite/delete buttons
@@ -126,7 +142,7 @@ const createFavoriteElement = (id) => {
 		${feature.properties.title}
 	`;
 	return a;
-};
+}
 
 const refreshFavorites = () => {
 	const favoritesContainer = document.querySelector("#favorites-list");
@@ -135,7 +151,17 @@ const refreshFavorites = () => {
 	{
 		favoritesContainer.appendChild(createFavoriteElement(id));
 	}
-};
+}
+
+const removeFromFavoritesArray = (id) => {
+	// create temp array to store modified favoriteIds array
+	let tempFavs = [];
+
+	// filter array to eliminate values with the desired id
+	tempFavs = favoriteIds.filter((element) => element != id);
+
+	favoriteIds = tempFavs;
+}
 
 const getIsFavorite = (id) => {
 	for (const listId of favoriteIds)
@@ -149,7 +175,21 @@ const getIsFavorite = (id) => {
 }
 
 const init = () => {
+	// initialize mapbox element
 	map.initMap(lnglatNYS);
+
+	// load in items from local storage
+	favoriteIds = storage.readFromLocalStorage("favs");
+
+	// verify if data was loaded
+	if (!Array.isArray(favoriteIds))
+	{
+	  // if nothing in local storage, set to empty array
+	  console.log("empty");
+	  favoriteIds = [];
+	}
+
+	// download external park data
 	ajax.downloadFile("data/parks.geojson", (str) => {
 		geojson = JSON.parse(str);
 		console.log(geojson);
@@ -157,6 +197,6 @@ const init = () => {
 		map.addMarkersToMap(geojson, showFeatureDetails);
 		setupUI();
 	})
-};
+}
 
 init();
